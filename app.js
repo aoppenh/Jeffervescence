@@ -157,12 +157,12 @@ const app = {
             for (let j = 1; j < this.movies.length; j++) {
                 const nm = '#el' + this.movies[j].id
                 if (clicked_id === this.movies[j].up.id) {
-                    const temp = document.getElementById(this.movies[j].el).innerHTML
-
-                    if (this.movies[j].id > 1) {
+                    if (this.movies[j].id < this.movies.length + 1) {
                         console.log('upping item')
-                        document.getElementById(this.movies[j].el).innerHTML = document.getElementById(this.movies[j].el).previousSibling.innerHTML
-                        document.getElementById(this.movies[j].el).previousSibling.innerHTML = temp
+                        const current = '#' + this.movies[j].el
+                        const next = '#' + this.movies[j + 1].el
+                        $(current).after($(next))
+                        //const temp = document.querySelector(current).
                     }
                 }
             }
@@ -177,11 +177,12 @@ const app = {
                 const nm = '#el' + this.movies[j].id
 
                 if (clicked_id === this.movies[j].down.id) {
-                    const temp = document.getElementById(this.movies[j].el).innerHTML
-                    if (this.movies[j].id < this.movies.length) {
+                    console.log('drop')
+                    if (this.movies[j].id > 1) {
                         console.log('dropping item')
-                        document.getElementById(this.movies[j].el).innerHTML = document.getElementById(this.movies[j].el).previousSibling.innerHTML
-                        document.getElementById(this.movies[j].el).previousSibling.innerHTML = temp
+                        const current = '#' + this.movies[j].el
+                        const next = '#' + this.movies[j + 1].el
+                        $(current).before($(next))
                     }
                 }
             }
