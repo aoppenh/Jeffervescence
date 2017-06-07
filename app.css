@@ -1,3 +1,7 @@
 #list {
     text-align: left;
 }
+
+ul {
+    list-style: none;
+}

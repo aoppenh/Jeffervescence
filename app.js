@@ -23,7 +23,7 @@ const app = {
 
         const listItem = this.buildListItem(movie)
         this.list.appendChild(listItem)
-        this.movies.push(movie)
+        this.movies[this.max + 1] = movie
 
         this.max++
         this.count++
@@ -31,21 +31,33 @@ const app = {
 
     buildListItem(movie) {
         const item = document.createElement('li')
+        item.setAttribute('id', 'el' + movie.id)
+        console.log(item.getAttribute('id'))
         item.textContent = movie.name
 
         const promoteButton = document.createElement('button')
-        promoteButton.setAttribute('id', 'prmB' + this.count)
+        promoteButton.setAttribute('id', 'prmB' + movie.id)
         promoteButton.setAttribute('onClick', 'app.promoteItem(this.id)')
         promoteButton.setAttribute('type', 'button')
-        promoteButton.setAttribute('class', 'warning button')
+        promoteButton.setAttribute('class', 'success button')
         promoteButton.innerHTML = '&nbsp + &nbsp'
-        promoteButton.style.color = 'red'
+        promoteButton.style.color = 'blue'
         promoteButton.style.fontSize = '1.5rem'
         item.appendChild(promoteButton)
 
+        const demoteButton = document.createElement('button')
+        demoteButton.setAttribute('id', 'prmB' + movie.id)
+        demoteButton.setAttribute('onClick', 'app.demoteItem(this.id)')
+        demoteButton.setAttribute('type', 'button')
+        demoteButton.setAttribute('class', 'warning button')
+        demoteButton.innerHTML = '&nbsp - &nbsp'
+        demoteButton.style.color = 'red'
+        demoteButton.style.fontSize = '1.5rem'
+        item.appendChild(demoteButton)
+
         const deleteButton = document.createElement('button')
-        deleteButton.setAttribute('id', 'delB' + this.count)
-        deleteButton.setAttribute('onClick', 'deleteItem(this.id)')
+        deleteButton.setAttribute('id', 'delB' + movie.id)
+        deleteButton.setAttribute('onClick', 'app.deleteItem(this.id)')
         deleteButton.setAttribute('type', 'button')
         deleteButton.setAttribute('class', 'alert button')
         deleteButton.innerHTML = '&nbsp X &nbsp'
@@ -54,8 +66,8 @@ const app = {
         item.appendChild(deleteButton)
 
         const upButton = document.createElement('button')
-        upButton.setAttribute('id', 'delB' + this.count)
-        upButton.setAttribute('onClick', 'upItem(this.id)')
+        upButton.setAttribute('id', 'delB' + movie.id)
+        upButton.setAttribute('onClick', 'app.upItem(item)')
         upButton.setAttribute('type', 'button')
         upButton.setAttribute('class', 'primary button')
         upButton.innerHTML = '&nbsp ↑ &nbsp'
@@ -64,8 +76,8 @@ const app = {
         item.appendChild(upButton)
 
         const downButton = document.createElement('button')
-        downButton.setAttribute('id', 'delB' + this.count)
-        downButton.setAttribute('onClick', 'downItem(this.id)')
+        downButton.setAttribute('id', 'delB' + movie.id)
+        downButton.setAttribute('onClick', 'app.downItem(item)')
         downButton.setAttribute('type', 'button')
         downButton.setAttribute('class', 'primary button')
         downButton.innerHTML = '&nbsp ↓ &nbsp'
@@ -79,48 +91,95 @@ const app = {
     promoteItem(clicked_id) {
         console.log('promoting item')
 
-        const ul = document.querySelector('ul')
-        const ulLen = ul.childNodes.length
-        for (let k = 0; k < ulLen; k++) {
+        const l = document.querySelector('ol')
+        const lLen = l.childNodes.length
+        for (let k = 0; k < lLen; k++) {
             for (let movie in this.movies) {
-                const nm = 'prmB' + name
-                console.log(this.movies)
-                if (movie.bool && nm === clicked_id) {
+                const nm = 'prmB' + movie
+                const ed = '#el' + movie
+                if (nm === clicked_id) {
                     movie.bool = false
-                    document.querySelector(movie.id).style.border = 'thick solid crimson'
-                } else if (nm === clicked_id) {
-                    movie.bool = true
-                    document.querySelector(movie.id).style.border = 'transparent'
+                    document.querySelector(ed).style.border = 'thick solid crimson'
                 }
             }
         }
     },
 
-    deleteItem(item_id) {
-        console.log('deleting item')
+    demoteItem(clicked_id) {
+        console.log('demoting item')
 
-        let k = 1
-        for (let bool in boolList) {
-            for (let name in list) {
-                let split = new Array()
-                split = name.split('')
-                const id = '#el' + split[0]
-                const nm = '#el' + name
-                //boolList.splice(delList.indexOf(clicked_id), 1)
-                this.movies[k].bool = false
-
-                $(liList[delList.indexOf(clicked_id)]).remove()
+        const l = document.querySelector('ol')
+        const lLen = l.childNodes.length
+        for (let k = 0; k < lLen; k++) {
+            for (let movie in this.movies) {
+                const nm = 'prmB' + movie
+                const ed = '#el' + movie
+                if (nm === clicked_id) {
+                    movie.bool = false
+                    document.querySelector(ed).style.border = 'transparent'
+                }
             }
-            k++
         }
     },
 
-    upItem(clicked_id) {
+    deleteItem(clicked_id) {
+        console.log('deleting item')
 
+        const l = document.querySelector('ol')
+        const lLen = l.childNodes.length
+        for (let k = 0; k < lLen; k++) {
+            for (let movie in this.movies) {
+                const nm = '#el' + movie
+                console.log(nm)
+                movie.bool = false
+
+                //liList[delList.indexOf(clicked_id)]
+                if (k === movie) {
+                    $(nm).remove()
+                }
+                //document.querySelector(nm).style.border = 'thick solid crimson'
+            }
+        }
     },
 
-    downItem(clicked_id) {
+    upItem(item) {
+        let current
+        let next
 
+        console.log('upping item')
+
+        const l = document.querySelector('ol')
+        const lLen = l.childNodes.length
+        for (let k = 0; k < lLen; k++) {
+            for (let movie in this.movies) {
+                const nm = '#el' + movie
+                console.log(nm)
+                movie.bool = false
+
+                //$(liList[delList.indexOf(clicked_id)]).remove()
+                document.querySelector(nm).style.border = 'thick solid crimson'
+            }
+        }
+    },
+
+    downItem(item) {
+        let current
+        let next
+
+        console.log('dropping item')
+
+        const l = document.querySelector('ol')
+        const lLen = l.childNodes.length
+        for (let k = 0; k < lLen; k++) {
+            for (let movie in this.movies) {
+                const nm = '#el' + movie
+                console.log(nm)
+                movie.bool = false
+
+                //$(liList[delList.indexOf(clicked_id)]).remove()
+                document.querySelector(nm).style.border = 'thick solid crimson'
+            }
+        }
     },
 }
 
