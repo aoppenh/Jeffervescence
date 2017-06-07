@@ -30,6 +30,7 @@ const app = {
         const item = document.createElement('li')
         item.setAttribute('id', 'el' + movie.id)
         item.textContent = movie.name
+        movie.el = item.id
 
         const promoteButton = document.createElement('button')
         promoteButton.setAttribute('id', 'prmB' + movie.id)
@@ -141,35 +142,39 @@ const app = {
     },
 
     upItem(clicked_id) {
-        let current
-        let next
-
-        console.log('upping item')
-
         const l = document.querySelector('ol')
         const lLen = l.childNodes.length
-        for (let k = 0; k < lLen; k++) {
-            for (let movie in this.movies) {
-                const nm = '#el' + movie
-                console.log(nm)
-                movie.bool = false
+        for (let k = 1; k < lLen + 1; k++) {
+            for (let j = 1; j < this.movies.length; j++) {
+                const nm = '#el' + this.movies[j].id
+
+                if (clicked_id === this.movies[j].up.id) {
+                    const temp = document.getElementById(this.movies[j].el).innerHTML
+                    if (this.movies[j].id > 1) {
+                        console.log('upping item')
+                        document.getElementById(this.movies[j].el).innerHTML = document.getElementById(this.movies[j].el).previousSibling.innerHTML
+                        document.getElementById(this.movies[j].el).previousSibling.innerHTML = temp
+                    }
+                }
             }
         }
     },
 
     downItem(clicked_id) {
-        let current
-        let next
-
-        console.log('dropping item')
-
         const l = document.querySelector('ol')
         const lLen = l.childNodes.length
-        for (let k = 0; k < lLen; k++) {
-            for (let movie in this.movies) {
-                const nm = '#el' + movie
-                console.log(nm)
-                movie.bool = false
+        for (let k = 1; k < lLen + 1; k++) {
+            for (let j = 1; j < this.movies.length; j++) {
+                const nm = '#el' + this.movies[j].id
+
+                if (clicked_id === this.movies[j].down.id) {
+                    const temp = document.getElementById(this.movies[j].el).innerHTML
+                    if (this.movies[j].id < this.movies.length) {
+                        console.log('dropping item')
+                        document.getElementById(this.movies[j].el).innerHTML = document.getElementById(this.movies[j].el).previousSibling.innerHTML
+                        document.getElementById(this.movies[j].el).previousSibling.innerHTML = temp
+                    }
+                }
             }
         }
     },
