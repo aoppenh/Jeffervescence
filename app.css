@@ -2,7 +2,7 @@
     text-align: left;
 }
 
-ul {
+ol {
     list-style: none;
 }
 
@@ -15,4 +15,9 @@ h1 {
 body {
     background-size: 100vw 100vh;
     background-repeat: no-repeat;
+}
+
+ol {
+    background-color: darkgrey;
+    opacity:  0.65;
 }
