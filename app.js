@@ -21,10 +21,11 @@ const app = {
 
         const listItem = this.buildListItem(movie)
         this.list.appendChild(listItem)
+        
         this.movies[this.max + 1] = movie
 
-        if (listEmpty === false) {
-            list.insertBefore(listItem, list.childNodes[0])
+        if (this.listEmpty === false) {
+            this.list.insertBefore(listItem, this.list.childNodes[0])
         } else {
             this.list.appendChild(listItem)
             this.listEmpty = false
@@ -72,27 +73,27 @@ const app = {
         movie.del = deleteButton
         item.appendChild(deleteButton)
 
-        // const upButton = document.createElement('button')
-        // upButton.setAttribute('id', 'upB' + movie.id)
-        // upButton.setAttribute('onClick', 'app.upItem(this.id)')
-        // upButton.setAttribute('type', 'button')
-        // upButton.setAttribute('class', 'primary button')
-        // upButton.innerHTML = '&nbsp ↑ &nbsp'
-        // upButton.style.color = 'gold'
-        // upButton.style.fontSize = '1.5rem'
-        // movie.up = upButton
-        // item.appendChild(upButton)
+        const upButton = document.createElement('button')
+        upButton.setAttribute('id', 'upB' + movie.id)
+        upButton.setAttribute('onClick', 'app.upItem(this.id)')
+        upButton.setAttribute('type', 'button')
+        upButton.setAttribute('class', 'primary button')
+        upButton.innerHTML = '&nbsp ↑ &nbsp'
+        upButton.style.color = 'gold'
+        upButton.style.fontSize = '1.5rem'
+        movie.up = upButton
+        item.appendChild(upButton)
 
-        // const downButton = document.createElement('button')
-        // downButton.setAttribute('id', 'dwnB' + movie.id)
-        // downButton.setAttribute('onClick', 'app.downItem(this.id)')
-        // downButton.setAttribute('type', 'button')
-        // downButton.setAttribute('class', 'primary button')
-        // downButton.innerHTML = '&nbsp ↓ &nbsp'
-        // downButton.style.color = 'gold'
-        // downButton.style.fontSize = '1.5rem'
-        // movie.down = downButton
-        // item.appendChild(downButton)
+        const downButton = document.createElement('button')
+        downButton.setAttribute('id', 'dwnB' + movie.id)
+        downButton.setAttribute('onClick', 'app.downItem(this.id)')
+        downButton.setAttribute('type', 'button')
+        downButton.setAttribute('class', 'primary button')
+        downButton.innerHTML = '&nbsp ↓ &nbsp'
+        downButton.style.color = 'gold'
+        downButton.style.fontSize = '1.5rem'
+        movie.down = downButton
+        item.appendChild(downButton)
 
         return item
     },
