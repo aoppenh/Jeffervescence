@@ -23,6 +23,13 @@ const app = {
         this.list.appendChild(listItem)
         this.movies[this.max + 1] = movie
 
+        if (listEmpty === false) {
+            list.insertBefore(listItem, list.childNodes[0])
+        } else {
+            this.list.appendChild(listItem)
+            this.listEmpty = false
+        }
+
         this.max++
     },
 
@@ -65,27 +72,27 @@ const app = {
         movie.del = deleteButton
         item.appendChild(deleteButton)
 
-        const upButton = document.createElement('button')
-        upButton.setAttribute('id', 'upB' + movie.id)
-        upButton.setAttribute('onClick', 'app.upItem(this.id)')
-        upButton.setAttribute('type', 'button')
-        upButton.setAttribute('class', 'primary button')
-        upButton.innerHTML = '&nbsp ↑ &nbsp'
-        upButton.style.color = 'gold'
-        upButton.style.fontSize = '1.5rem'
-        movie.up = upButton
-        item.appendChild(upButton)
+        // const upButton = document.createElement('button')
+        // upButton.setAttribute('id', 'upB' + movie.id)
+        // upButton.setAttribute('onClick', 'app.upItem(this.id)')
+        // upButton.setAttribute('type', 'button')
+        // upButton.setAttribute('class', 'primary button')
+        // upButton.innerHTML = '&nbsp ↑ &nbsp'
+        // upButton.style.color = 'gold'
+        // upButton.style.fontSize = '1.5rem'
+        // movie.up = upButton
+        // item.appendChild(upButton)
 
-        const downButton = document.createElement('button')
-        downButton.setAttribute('id', 'dwnB' + movie.id)
-        downButton.setAttribute('onClick', 'app.downItem(this.id)')
-        downButton.setAttribute('type', 'button')
-        downButton.setAttribute('class', 'primary button')
-        downButton.innerHTML = '&nbsp ↓ &nbsp'
-        downButton.style.color = 'gold'
-        downButton.style.fontSize = '1.5rem'
-        movie.down = downButton
-        item.appendChild(downButton)
+        // const downButton = document.createElement('button')
+        // downButton.setAttribute('id', 'dwnB' + movie.id)
+        // downButton.setAttribute('onClick', 'app.downItem(this.id)')
+        // downButton.setAttribute('type', 'button')
+        // downButton.setAttribute('class', 'primary button')
+        // downButton.innerHTML = '&nbsp ↓ &nbsp'
+        // downButton.style.color = 'gold'
+        // downButton.style.fontSize = '1.5rem'
+        // movie.down = downButton
+        // item.appendChild(downButton)
 
         return item
     },
@@ -96,9 +103,10 @@ const app = {
         const l = document.querySelector('ol')
         const lLen = l.childNodes.length
         for (let k = 0; k < lLen + 1; k++) {
-            for (let movie in this.movies) {
-                const nm = 'prmB' + movie
-                const ed = '#el' + movie
+            for (let j = 1; j < this.movies.length; j++) {
+                const nm = 'prmB' + this.movies[j].id
+                const ed = '#el' + this.movies[j].id
+
                 if (nm === clicked_id) {
                     document.querySelector(ed).style.color = 'crimson'
                     document.querySelector(ed).style.fontSize = '1.5rem'
@@ -113,9 +121,10 @@ const app = {
         const l = document.querySelector('ol')
         const lLen = l.childNodes.length
         for (let k = 0; k < lLen + 1; k++) {
-            for (let movie in this.movies) {
-                const nm = 'demB' + movie
-                const ed = '#el' + movie
+            for (let j = 1; j < this.movies.length; j++) {
+                const nm = 'demB' + this.movies[j].id
+                const ed = '#el' + this.movies[j].id
+
                 if (nm === clicked_id) {
                     document.querySelector(ed).style.color = 'black'
                     document.querySelector(ed).style.fontSize = '1rem'
@@ -133,7 +142,6 @@ const app = {
             for (let j = 1; j < this.movies.length; j++) {
                 const nm = '#el' + this.movies[j].id
 
-
                 if (clicked_id === this.movies[j].del.id) {
                     $(nm).remove()
                 }
@@ -147,9 +155,9 @@ const app = {
         for (let k = 1; k < lLen + 1; k++) {
             for (let j = 1; j < this.movies.length; j++) {
                 const nm = '#el' + this.movies[j].id
-
                 if (clicked_id === this.movies[j].up.id) {
                     const temp = document.getElementById(this.movies[j].el).innerHTML
+
                     if (this.movies[j].id > 1) {
                         console.log('upping item')
                         document.getElementById(this.movies[j].el).innerHTML = document.getElementById(this.movies[j].el).previousSibling.innerHTML

@@ -4,6 +4,8 @@
 
 ol {
     list-style: none;
+    background-color: darkgrey;
+    opacity:  0.8;
 }
 
 h1 {
@@ -15,9 +17,4 @@ h1 {
 body {
     background-size: 100vw 100vh;
     background-repeat: no-repeat;
-}
-
-ol {
-    background-color: darkgrey;
-    opacity:  0.65;
 }
