@@ -47,7 +47,7 @@ const app = {
         item.setAttribute('id', 'el' + movie.id)
         item.dataset.id = movie.id
         item.textContent = movie.name
-        console.log(movie.name)
+        console.log(movie.name + ' : name')
         movie.el = item.id
 
         const promoteButton = document.createElement('button')
@@ -201,14 +201,13 @@ const app = {
     },
 
     swapItems(clicked_id) {
-        const current = document.querySelector('#swap1').value
-        const next = document.querySelector('#swap2').value
+        console.log('swapping items')
 
-        let copyTo = $(next).clone(true)
-        let copyFrom = $(current).clone(true)
+        const swap1 = document.querySelector('#swap1').innerHTML
+        const swap2 = document.querySelector('#swap2').innerHTML
 
-        $(next).replaceWith(copyFrom)
-        $(current).replaceWith(copyTo)
+        document.querySelector('#swap1').innerHTML = swap2
+        document.querySelector('#swap2').innerHTML = swap1
     },
 }
 
