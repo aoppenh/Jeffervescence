@@ -8,7 +8,7 @@ const app = {
             .querySelector(selectors.formSelector)
             .addEventListener('submit', this.addMovie.bind(this))
 
-        this.movies.push(null)
+        //this.movies.push(null)
     },
 
     addMovie(ev) {
@@ -17,7 +17,7 @@ const app = {
         const f = ev.target
 
         const movie = {
-            id: this.max + 1,
+            id: this.max,
             name: f.movieName.value,
         }
 
@@ -111,7 +111,7 @@ const app = {
         const l = document.querySelector('ol')
         const lLen = l.childNodes.length
         for (let k = 0; k < lLen + 1; k++) {
-            for (let j = 1; j < this.movies.length; j++) {
+            for (let j = 0; j < this.movies.length; j++) {
                 const nm = 'prmB' + this.movies[j].id
                 const ed = '#el' + this.movies[j].id
 
@@ -129,7 +129,7 @@ const app = {
         const l = document.querySelector('ol')
         const lLen = l.childNodes.length
         for (let k = 0; k < lLen + 1; k++) {
-            for (let j = 1; j < this.movies.length; j++) {
+            for (let j = 0; j < this.movies.length; j++) {
                 const nm = 'demB' + this.movies[j].id
                 const ed = '#el' + this.movies[j].id
 
@@ -146,8 +146,8 @@ const app = {
 
         const l = document.querySelector('ol')
         const lLen = l.childNodes.length
-        for (let k = 1; k < lLen + 1; k++) {
-            for (let j = 1; j < this.movies.length; j++) {
+        for (let k = 0; k < lLen + 1; k++) {
+            for (let j = 0; j < this.movies.length; j++) {
                 const nm = '#el' + this.movies[j].id
 
                 if (clicked_id === this.movies[j].del.id) {
