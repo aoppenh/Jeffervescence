@@ -268,6 +268,7 @@ const app = {
             if (nm === clicked_id) {
                 const split = document.querySelector(ed).textContent.split('')
                 this.movies[j].name = document.querySelector(ed).textContent.substring(0, split.indexOf('~'))
+                this.movies[j].year = document.querySelector(ed).textContent.substring(split.indexOf('(') + 1, split.indexOf(')'))
                 localStorage.setItem('movies', JSON.stringify(this.movies))
                 location.reload()
                 break
