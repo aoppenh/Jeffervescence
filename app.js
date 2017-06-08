@@ -23,6 +23,7 @@ const app = {
         this.list.appendChild(listItem)
 
         this.movies.unshift(movie)
+        localStorage.setItem('movies', JSON.stringify(this.movies))
 
         const l = document.querySelector('ol')
         const lLen = l.childNodes.length
@@ -166,6 +167,7 @@ const app = {
                     const nd = '#el' + this.movies[i].id
                     if (nm === nd) {
                         this.movies.splice(i, 1)
+                        localStorage.setItem('movies', JSON.stringify(this.movies))
                         break
                     }
                 }
