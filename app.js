@@ -24,7 +24,7 @@ const app = {
         const listItem = this.buildListItem(movie)
         this.list.appendChild(listItem)
 
-        this.movies.push(movie)
+        this.movies.unshift(movie)
 
         const l = document.querySelector('ol')
         const lLen = l.childNodes.length
@@ -72,6 +72,7 @@ const app = {
         demoteButton.style.color = 'red'
         demoteButton.style.fontSize = '1.6rem'
         movie.del = demoteButton
+        demoteButton.disabled = true
         item.appendChild(demoteButton)
 
         const deleteButton = document.createElement('button')
@@ -120,11 +121,15 @@ const app = {
         for (let k = 0; k < lLen + 1; k++) {
             for (let j = 0; j < this.movies.length; j++) {
                 const nm = 'prmB' + this.movies[j].id
+                const dm = 'demB' + this.movies[j].id
+                const pm = 'prmB' + this.movies[j].id
                 const ed = '#el' + this.movies[j].id
 
                 if (nm === clicked_id) {
                     document.querySelector(ed).style.color = 'crimson'
                     document.querySelector(ed).style.fontSize = '2.9rem'
+                    document.getElementById(pm).disabled = true
+                    document.getElementById(dm).disabled = false
                 }
             }
         }
@@ -138,11 +143,15 @@ const app = {
         for (let k = 0; k < lLen + 1; k++) {
             for (let j = 0; j < this.movies.length; j++) {
                 const nm = 'demB' + this.movies[j].id
+                const dm = 'demB' + this.movies[j].id
+                const pm = 'prmB' + this.movies[j].id
                 const ed = '#el' + this.movies[j].id
 
                 if (nm === clicked_id) {
                     document.querySelector(ed).style.color = 'goldenrod'
                     document.querySelector(ed).style.fontSize = '2rem'
+                    document.getElementById(dm).disabled = true
+                    document.getElementById(pm).disabled = false
                 }
             }
         }
