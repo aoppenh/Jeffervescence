@@ -161,8 +161,9 @@ const app = {
                         console.log('upping item')
                         const current = '#' + this.movies[j].el
                         const next = '#' + this.movies[j + 1].el
+                        console.log($(current).text())
+                        console.log($(next).text())
                         $(current).insertAfter($(next))
-                        // app.list.insertBefore(document.querySelector(current), this.list.childNodes[this.movies.indexOf(this.movies[j].nextSibling)])
                     }
                 }
             }
@@ -182,7 +183,6 @@ const app = {
                         const current = '#' + this.movies[j].el
                         const next = '#' + this.movies[j - 1].el
                         $(current).insertBefore($(next))
-                        // app.list.insertAfter(document.querySelector(current), this.list.childNodes[this.movies.indexOf(this.movies[j].previousSibling)])
                     }
                 }
             }
