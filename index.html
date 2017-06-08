@@ -14,15 +14,24 @@
 <body style="background-image:url(theGoldblum.jpg)">
     <div class="row">
         <div class="medium-8 medium-offset-2 column">
-            <h1>Jeffervescence</h1>
+            <div class="title">
+                <h1>Jeffervescence</h1>
+            </div>
             <form id="movie-form">
                 <div class="input-group">
                     <input
                         type="text"
                         class="input-group-field"
                         name="movieName"
-                        placeholder="Your Favorite Jeff Goldblum Movie"
+                        placeholder="Jeff Goldblum Movie"
                         autofocus
+                        required
+                    >
+                    <input
+                        type="number"
+                        class="input-group-field"
+                        name="movieYear"
+                        placeholder="Release Year"
                         required
                     >
                     <div class="input-group-button">
@@ -30,7 +39,14 @@
                             class="secondary button"
                             type="submit"
                         >
-                            Add Movie
+                            Add Movie 
+                        </button>
+                        <button
+                            id="res"
+                            class="secondary button"
+                            type="reset"
+                        >
+                            Clear List &nbsp
                         </button>
                     </div>
                 </div>

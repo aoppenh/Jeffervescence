@@ -24,3 +24,8 @@
         </button>
     </div>
 </div>
+
+<input
+    type="color"
+    name="colorChange"
+>

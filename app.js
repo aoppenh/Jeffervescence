@@ -4,9 +4,14 @@ const app = {
         this.listEmpty = true
         this.list = document.querySelector(selectors.listSelector)
         this.movies = []
+
+        document.querySelector('#res').setAttribute('onClick', 'app.clearMem()')
+
         document
             .querySelector(selectors.formSelector)
             .addEventListener('submit', this.addMovie.bind(this))
+
+        this.load()
     },
 
     addMovie(ev) {
@@ -17,19 +22,20 @@ const app = {
         const movie = {
             id: this.max,
             name: f.movieName.value,
+            year: f.movieYear.value,
         }
 
+        this.loadMovie(movie)
+
+        f.reset()
+    },
+
+    loadMovie(movie) {
         const listItem = this.buildListItem(movie)
         this.list.appendChild(listItem)
 
         this.movies.unshift(movie)
-        localStorage.setItem('movies', JSON.stringify(this.movies))
-
-        const l = document.querySelector('ol')
-        const lLen = l.childNodes.length
-        if (lLen === 0) {
-            this.listEmpty = true
-        }
+        this.save()
 
         if (this.listEmpty === false) {
             this.list.insertBefore(listItem, this.list.childNodes[0])
@@ -39,23 +45,55 @@ const app = {
         }
 
         this.max++
+    },
 
-        f.reset()
+    load() {
+        const moviesJSON = JSON.parse(localStorage.getItem('movies'))
+
+        if (moviesJSON) {
+            moviesJSON.reverse().map(this.loadMovie.bind(this))
+        }
+    },
+
+    save() {
+        localStorage.setItem('movies', JSON.stringify(this.movies))
+    },
+
+    clearMem() {
+        console.log('clearing list')
+
+        localStorage.clear()
+
+        $('li').remove()
     },
 
     buildListItem(movie) {
         const item = document.createElement('li')
         item.setAttribute('id', 'el' + movie.id)
         item.dataset.id = movie.id
-        item.textContent = movie.name + ' '
+        item.textContent = movie.name + ' ~ (' + movie.year + ') '
+        item.setAttribute('contentEditable', 'true')
         console.log(movie.name + ' : name')
         movie.el = item.id
+
+        const saveButton = document.createElement('button')
+        saveButton.setAttribute('id', 'savB' + movie.id)
+        saveButton.setAttribute('onClick', 'app.saveItem(this.id)')
+        saveButton.setAttribute('type', 'button')
+        saveButton.setAttribute('class', 'success button')
+        saveButton.setAttribute('contentEditable', 'false')
+        saveButton.innerHTML = '&nbsp $ &nbsp'
+        saveButton.style.color = 'whitesmoke'
+        saveButton.style.fontSize = '1.6rem'
+        movie.del = saveButton
+        item.appendChild(saveButton)
 
         const promoteButton = document.createElement('button')
         promoteButton.setAttribute('id', 'prmB' + movie.id)
         promoteButton.setAttribute('onClick', 'app.promoteItem(this.id)')
         promoteButton.setAttribute('type', 'button')
-        promoteButton.setAttribute('class', 'success button')
+        promoteButton.setAttribute('class', 'secondary button')
+        promoteButton.setAttribute('contentEditable', 'false')
         promoteButton.innerHTML = '&nbsp + &nbsp'
         promoteButton.style.color = 'blue'
         promoteButton.style.fontSize = '1.6rem'
@@ -67,6 +105,7 @@ const app = {
         demoteButton.setAttribute('onClick', 'app.demoteItem(this.id)')
         demoteButton.setAttribute('type', 'button')
         demoteButton.setAttribute('class', 'warning button')
+        demoteButton.setAttribute('contentEditable', 'false')
         demoteButton.innerHTML = '&nbsp ─ &nbsp'
         demoteButton.style.color = 'red'
         demoteButton.style.fontSize = '1.6rem'
@@ -79,6 +118,7 @@ const app = {
         deleteButton.setAttribute('onClick', 'app.deleteItem(this.id)')
         deleteButton.setAttribute('type', 'button')
         deleteButton.setAttribute('class', 'alert button')
+        deleteButton.setAttribute('contentEditable', 'false')
         deleteButton.innerHTML = '&nbsp X &nbsp'
         deleteButton.style.color = 'whitesmoke'
         deleteButton.style.fontSize = '1.6rem'
@@ -92,6 +132,7 @@ const app = {
         // upButton.setAttribute('onClick', 'app.upItem(this.id)')
         // upButton.setAttribute('type', 'button')
         // upButton.setAttribute('class', 'primary button')
+        // upButton.setAttribute('contentEditable', 'false')
         // upButton.innerHTML = '&nbsp ↑ &nbsp'
         // upButton.style.color = 'gold'
         // upButton.style.fontSize = '1.6rem'
@@ -103,6 +144,7 @@ const app = {
         // downButton.setAttribute('onClick', 'app.downItem(this.id)')
         // downButton.setAttribute('type', 'button')
         // downButton.setAttribute('class', 'primary button')
+        // downButton.setAttribute('contentEditable', 'false')
         // downButton.innerHTML = '&nbsp ↓ &nbsp'
         // downButton.style.color = 'gold'
         // downButton.style.fontSize = '1.6rem'
@@ -167,7 +209,7 @@ const app = {
                     const nd = '#el' + this.movies[i].id
                     if (nm === nd) {
                         this.movies.splice(i, 1)
-                        localStorage.setItem('movies', JSON.stringify(this.movies))
+                        this.save()
                         break
                     }
                 }
@@ -206,6 +248,24 @@ const app = {
                     const next = '#' + this.movies[j - 1].el
                     $(current).insertBefore($(next))
                 }
+            }
+        }
+    },
+
+    saveItem(clicked_id) {
+        console.log('saving edited item')
+
+        const l = document.querySelector('ol')
+        const lLen = l.childNodes.length
+        for (let j = 0; j < this.movies.length; j++) {
+            const nm = 'savB' + this.movies[j].id
+            const ed = '#el' + this.movies[j].id
+
+            if (nm === clicked_id) {
+                const split = document.querySelector(ed).textContent.split('')
+                console.log(split.indexOf('~'))
+                this.movies[j].name = document.querySelector(ed).textContent.substring(0, split.indexOf('~'))
+                localStorage.setItem('movies', JSON.stringify(this.movies))
             }
         }
     },
