@@ -32,6 +32,8 @@ const app = {
         }
 
         this.max++
+
+        f.reset()
     },
 
     buildListItem(movie) {
