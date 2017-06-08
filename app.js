@@ -7,8 +7,6 @@ const app = {
         document
             .querySelector(selectors.formSelector)
             .addEventListener('submit', this.addMovie.bind(this))
-
-        //this.movies.push(null)
     },
 
     addMovie(ev) {
