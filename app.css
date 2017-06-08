@@ -9,9 +9,13 @@ ol {
 }
 
 h1 {
-    background-color: darkgrey;
-    opacity:  0.65;
+    background-color: #4b79b4;
+    opacity:  0.8;
+    color: 	#9932CC;
     text-align: center;
+    font-family: Courier New, Courier, monospace;
+    font-size: 4rem;
+    font-weight: bold;
 }
 
 body {
@@ -22,4 +26,10 @@ body {
 li {
     color: black;
     font-size: 2rem;
+    clear: right;
+    border: 0.5rem;
+}
+
+.button {
+    float: right;
 }

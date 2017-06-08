@@ -62,7 +62,7 @@ const app = {
     clearMem() {
         console.log('clearing list')
 
-        localStorage.clear()
+        localStorage.removeItem('movies')
 
         $('li').remove()
     },
@@ -76,56 +76,19 @@ const app = {
         console.log(movie.name + ' : name')
         movie.el = item.id
 
-        const saveButton = document.createElement('button')
-        saveButton.setAttribute('id', 'savB' + movie.id)
-        saveButton.setAttribute('onClick', 'app.saveItem(this.id)')
-        saveButton.setAttribute('type', 'button')
-        saveButton.setAttribute('class', 'success button')
-        saveButton.setAttribute('contentEditable', 'false')
-        saveButton.innerHTML = '&nbsp $ &nbsp'
-        saveButton.style.color = 'whitesmoke'
-        saveButton.style.fontSize = '1.6rem'
-        movie.del = saveButton
-        item.appendChild(saveButton)
-
-        const promoteButton = document.createElement('button')
-        promoteButton.setAttribute('id', 'prmB' + movie.id)
-        promoteButton.setAttribute('onClick', 'app.promoteItem(this.id)')
-        promoteButton.setAttribute('type', 'button')
-        promoteButton.setAttribute('class', 'secondary button')
-        promoteButton.setAttribute('contentEditable', 'false')
-        promoteButton.innerHTML = '&nbsp + &nbsp'
-        promoteButton.style.color = 'blue'
-        promoteButton.style.fontSize = '1.6rem'
-        movie.prm = promoteButton
-        item.appendChild(promoteButton)
-
-        const demoteButton = document.createElement('button')
-        demoteButton.setAttribute('id', 'demB' + movie.id)
-        demoteButton.setAttribute('onClick', 'app.demoteItem(this.id)')
-        demoteButton.setAttribute('type', 'button')
-        demoteButton.setAttribute('class', 'warning button')
-        demoteButton.setAttribute('contentEditable', 'false')
-        demoteButton.innerHTML = '&nbsp ─ &nbsp'
-        demoteButton.style.color = 'red'
-        demoteButton.style.fontSize = '1.6rem'
-        movie.del = demoteButton
-        demoteButton.disabled = true
-        item.appendChild(demoteButton)
-
-        const deleteButton = document.createElement('button')
-        deleteButton.setAttribute('id', 'delB' + movie.id)
-        deleteButton.setAttribute('onClick', 'app.deleteItem(this.id)')
-        deleteButton.setAttribute('type', 'button')
-        deleteButton.setAttribute('class', 'alert button')
-        deleteButton.setAttribute('contentEditable', 'false')
-        deleteButton.innerHTML = '&nbsp X &nbsp'
-        deleteButton.style.color = 'whitesmoke'
-        deleteButton.style.fontSize = '1.6rem'
-        movie.del = deleteButton
-        item.appendChild(deleteButton)
-
         // document.querySelector('#swap').setAttribute('onClick', 'app.swapItems(this.id)')
+
+        // const downButton = document.createElement('button')
+        // downButton.setAttribute('id', 'dwnB' + movie.id)
+        // downButton.setAttribute('onClick', 'app.downItem(this.id)')
+        // downButton.setAttribute('type', 'button')
+        // downButton.setAttribute('class', 'primary button')
+        // downButton.setAttribute('contentEditable', 'false')
+        // downButton.innerHTML = '&nbsp ↓ &nbsp'
+        // downButton.style.color = 'gold'
+        // downButton.style.fontSize = '1.6rem'
+        // movie.down = downButton
+        // item.appendChild(downButton)
 
         // const upButton = document.createElement('button')
         // upButton.setAttribute('id', 'upB' + movie.id)
@@ -139,17 +102,54 @@ const app = {
         // movie.up = upButton
         // item.appendChild(upButton)
 
-        // const downButton = document.createElement('button')
-        // downButton.setAttribute('id', 'dwnB' + movie.id)
-        // downButton.setAttribute('onClick', 'app.downItem(this.id)')
-        // downButton.setAttribute('type', 'button')
-        // downButton.setAttribute('class', 'primary button')
-        // downButton.setAttribute('contentEditable', 'false')
-        // downButton.innerHTML = '&nbsp ↓ &nbsp'
-        // downButton.style.color = 'gold'
-        // downButton.style.fontSize = '1.6rem'
-        // movie.down = downButton
-        // item.appendChild(downButton)
+        const deleteButton = document.createElement('button')
+        deleteButton.setAttribute('id', 'delB' + movie.id)
+        deleteButton.setAttribute('onClick', 'app.deleteItem(this.id)')
+        deleteButton.setAttribute('type', 'button')
+        deleteButton.setAttribute('class', 'alert button')
+        deleteButton.setAttribute('contentEditable', 'false')
+        deleteButton.innerHTML = '&nbsp X &nbsp'
+        deleteButton.style.color = 'whitesmoke'
+        deleteButton.style.fontSize = '1.6rem'
+        movie.del = deleteButton
+        item.appendChild(deleteButton)
+
+        const demoteButton = document.createElement('button')
+        demoteButton.setAttribute('id', 'demB' + movie.id)
+        demoteButton.setAttribute('onClick', 'app.demoteItem(this.id)')
+        demoteButton.setAttribute('type', 'button')
+        demoteButton.setAttribute('class', 'warning button')
+        demoteButton.setAttribute('contentEditable', 'false')
+        demoteButton.innerHTML = '&nbsp ─ &nbsp'
+        demoteButton.style.color = 'red'
+        demoteButton.style.fontSize = '1.6rem'
+        movie.dem = demoteButton
+        demoteButton.disabled = true
+        item.appendChild(demoteButton)
+
+        const promoteButton = document.createElement('button')
+        promoteButton.setAttribute('id', 'prmB' + movie.id)
+        promoteButton.setAttribute('onClick', 'app.promoteItem(this.id)')
+        promoteButton.setAttribute('type', 'button')
+        promoteButton.setAttribute('class', 'secondary button')
+        promoteButton.setAttribute('contentEditable', 'false')
+        promoteButton.innerHTML = '&nbsp + &nbsp'
+        promoteButton.style.color = 'blue'
+        promoteButton.style.fontSize = '1.6rem'
+        movie.prm = promoteButton
+        item.appendChild(promoteButton)
+
+        const saveButton = document.createElement('button')
+        saveButton.setAttribute('id', 'savB' + movie.id)
+        saveButton.setAttribute('onClick', 'app.saveItem(this.id)')
+        saveButton.setAttribute('type', 'button')
+        saveButton.setAttribute('class', 'success button')
+        saveButton.setAttribute('contentEditable', 'false')
+        saveButton.innerHTML = '&nbsp $ &nbsp'
+        saveButton.style.color = 'whitesmoke'
+        saveButton.style.fontSize = '1.6rem'
+        movie.sav = saveButton
+        item.appendChild(saveButton)
 
         return item
     },
@@ -186,7 +186,7 @@ const app = {
             const ed = '#el' + this.movies[j].id
 
             if (nm === clicked_id) {
-                document.querySelector(ed).style.color = 'goldenrod'
+                document.querySelector(ed).style.color = 'black'
                 document.querySelector(ed).style.fontSize = '2rem'
                 document.getElementById(dm).disabled = true
                 document.getElementById(pm).disabled = false
@@ -201,13 +201,17 @@ const app = {
         const lLen = l.childNodes.length
         for (let j = 0; j < this.movies.length; j++) {
             const nm = '#el' + this.movies[j].id
+            console.log(this.movies[j].del.id)
+            console.log(clicked_id)
 
             if (clicked_id === this.movies[j].del.id) {
                 $(nm).remove()
 
                 for (let i = 0; i < this.movies.length; i++) {
                     const nd = '#el' + this.movies[i].id
+                    console.log('deleting1')
                     if (nm === nd) {
+                        console.log('deleting2')
                         this.movies.splice(i, 1)
                         this.save()
                         break
@@ -265,6 +269,8 @@ const app = {
                 const split = document.querySelector(ed).textContent.split('')
                 this.movies[j].name = document.querySelector(ed).textContent.substring(0, split.indexOf('~'))
                 localStorage.setItem('movies', JSON.stringify(this.movies))
+                location.reload()
+                break
             }
         }
     },
