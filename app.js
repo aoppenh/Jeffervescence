@@ -7,6 +7,8 @@ const app = {
         document
             .querySelector(selectors.formSelector)
             .addEventListener('submit', this.addMovie.bind(this))
+
+        this.movies.push(null)
     },
 
     addMovie(ev) {
@@ -22,7 +24,7 @@ const app = {
         const listItem = this.buildListItem(movie)
         this.list.appendChild(listItem)
 
-        this.movies[this.max + 1] = movie
+        this.movies.push(movie)
 
         if (this.listEmpty === false) {
             this.list.insertBefore(listItem, this.list.childNodes[0])
