@@ -118,19 +118,17 @@ const app = {
 
         const l = document.querySelector('ol')
         const lLen = l.childNodes.length
-        for (let k = 0; k < lLen + 1; k++) {
-            for (let j = 0; j < this.movies.length; j++) {
-                const nm = 'prmB' + this.movies[j].id
-                const dm = 'demB' + this.movies[j].id
-                const pm = 'prmB' + this.movies[j].id
-                const ed = '#el' + this.movies[j].id
+        for (let j = 0; j < this.movies.length; j++) {
+            const nm = 'prmB' + this.movies[j].id
+            const dm = 'demB' + this.movies[j].id
+            const pm = 'prmB' + this.movies[j].id
+            const ed = '#el' + this.movies[j].id
 
-                if (nm === clicked_id) {
-                    document.querySelector(ed).style.color = 'crimson'
-                    document.querySelector(ed).style.fontSize = '2.9rem'
-                    document.getElementById(pm).disabled = true
-                    document.getElementById(dm).disabled = false
-                }
+            if (nm === clicked_id) {
+                document.querySelector(ed).style.color = 'crimson'
+                document.querySelector(ed).style.fontSize = '2.9rem'
+                document.getElementById(pm).disabled = true
+                document.getElementById(dm).disabled = false
             }
         }
     },
@@ -140,19 +138,17 @@ const app = {
 
         const l = document.querySelector('ol')
         const lLen = l.childNodes.length
-        for (let k = 0; k < lLen + 1; k++) {
-            for (let j = 0; j < this.movies.length; j++) {
-                const nm = 'demB' + this.movies[j].id
-                const dm = 'demB' + this.movies[j].id
-                const pm = 'prmB' + this.movies[j].id
-                const ed = '#el' + this.movies[j].id
+        for (let j = 0; j < this.movies.length; j++) {
+            const nm = 'demB' + this.movies[j].id
+            const dm = 'demB' + this.movies[j].id
+            const pm = 'prmB' + this.movies[j].id
+            const ed = '#el' + this.movies[j].id
 
-                if (nm === clicked_id) {
-                    document.querySelector(ed).style.color = 'goldenrod'
-                    document.querySelector(ed).style.fontSize = '2rem'
-                    document.getElementById(dm).disabled = true
-                    document.getElementById(pm).disabled = false
-                }
+            if (nm === clicked_id) {
+                document.querySelector(ed).style.color = 'goldenrod'
+                document.querySelector(ed).style.fontSize = '2rem'
+                document.getElementById(dm).disabled = true
+                document.getElementById(pm).disabled = false
             }
         }
     },
@@ -162,13 +158,11 @@ const app = {
 
         const l = document.querySelector('ol')
         const lLen = l.childNodes.length
-        for (let k = 0; k < lLen + 1; k++) {
-            for (let j = 0; j < this.movies.length; j++) {
-                const nm = '#el' + this.movies[j].id
+        for (let j = 0; j < this.movies.length; j++) {
+            const nm = '#el' + this.movies[j].id
 
-                if (clicked_id === this.movies[j].del.id) {
-                    $(nm).remove()
-                }
+            if (clicked_id === this.movies[j].del.id) {
+                $(nm).remove()
             }
         }
     },
@@ -176,18 +170,16 @@ const app = {
     upItem(clicked_id) {
         const l = document.querySelector('ol')
         const lLen = l.childNodes.length
-        for (let k = 1; k < lLen + 1; k++) {
-            for (let j = 1; j < this.movies.length; j++) {
-                const nm = '#el' + this.movies[j].id
-                if (clicked_id === this.movies[j].up.id) {
-                    if (this.movies[j].id < this.movies.length + 1) {
-                        console.log('upping item')
-                        const current = '#' + this.movies[j].el
-                        const next = '#' + this.movies[j + 1].el
-                        console.log($(current).text())
-                        console.log($(next).text())
-                        $(current).insertAfter($(next))
-                    }
+        for (let j = 1; j < this.movies.length; j++) {
+            const nm = '#el' + this.movies[j].id
+            if (clicked_id === this.movies[j].up.id) {
+                if (this.movies[j].id < this.movies.length + 1) {
+                    console.log('upping item')
+                    const current = '#' + this.movies[j].el
+                    const next = '#' + this.movies[j + 1].el
+                    console.log($(current).text())
+                    console.log($(next).text())
+                    $(current).insertAfter($(next))
                 }
             }
         }
@@ -196,17 +188,15 @@ const app = {
     downItem(clicked_id) {
         const l = document.querySelector('ol')
         const lLen = l.childNodes.length
-        for (let k = 1; k < lLen + 1; k++) {
-            for (let j = 1; j < this.movies.length; j++) {
-                const nm = '#el' + this.movies[j].id
+        for (let j = 1; j < this.movies.length; j++) {
+            const nm = '#el' + this.movies[j].id
 
-                if (clicked_id === this.movies[j].down.id) {
-                    if (this.movies[j].id > 1) {
-                        console.log('dropping item')
-                        const current = '#' + this.movies[j].el
-                        const next = '#' + this.movies[j - 1].el
-                        $(current).insertBefore($(next))
-                    }
+            if (clicked_id === this.movies[j].down.id) {
+                if (this.movies[j].id > 1) {
+                    console.log('dropping item')
+                    const current = '#' + this.movies[j].el
+                    const next = '#' + this.movies[j - 1].el
+                    $(current).insertBefore($(next))
                 }
             }
         }
