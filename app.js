@@ -91,29 +91,29 @@ const app = {
 
         // document.querySelector('#swap').setAttribute('onClick', 'app.swapItems(this.id)')
 
-        // const downButton = document.createElement('button')
-        // downButton.setAttribute('id', 'dwnB' + movie.id)
-        // downButton.setAttribute('onClick', 'app.downItem(this.id)')
-        // downButton.setAttribute('type', 'button')
-        // downButton.setAttribute('class', 'primary button')
-        // downButton.setAttribute('contentEditable', 'false')
-        // downButton.innerHTML = '&nbsp ↓ &nbsp'
-        // downButton.style.color = 'gold'
-        // downButton.style.fontSize = '1.6rem'
-        // movie.down = downButton
-        // item.appendChild(downButton)
+        const downButton = document.createElement('button')
+        downButton.setAttribute('id', 'dwnB' + movie.id)
+        downButton.setAttribute('onClick', 'app.downItem(this.id)')
+        downButton.setAttribute('type', 'button')
+        downButton.setAttribute('class', 'primary button')
+        downButton.setAttribute('contentEditable', 'false')
+        downButton.innerHTML = '&nbsp ↓ &nbsp'
+        downButton.style.color = 'gold'
+        downButton.style.fontSize = '1.6rem'
+        movie.down = downButton
+        item.appendChild(downButton)
 
-        // const upButton = document.createElement('button')
-        // upButton.setAttribute('id', 'upB' + movie.id)
-        // upButton.setAttribute('onClick', 'app.upItem(this.id)')
-        // upButton.setAttribute('type', 'button')
-        // upButton.setAttribute('class', 'primary button')
-        // upButton.setAttribute('contentEditable', 'false')
-        // upButton.innerHTML = '&nbsp ↑ &nbsp'
-        // upButton.style.color = 'gold'
-        // upButton.style.fontSize = '1.6rem'
-        // movie.up = upButton
-        // item.appendChild(upButton)
+        const upButton = document.createElement('button')
+        upButton.setAttribute('id', 'upB' + movie.id)
+        upButton.setAttribute('onClick', 'app.upItem(this.id)')
+        upButton.setAttribute('type', 'button')
+        upButton.setAttribute('class', 'primary button')
+        upButton.setAttribute('contentEditable', 'false')
+        upButton.innerHTML = '&nbsp ↑ &nbsp'
+        upButton.style.color = 'gold'
+        upButton.style.fontSize = '1.6rem'
+        movie.up = upButton
+        item.appendChild(upButton)
 
         const deleteButton = document.createElement('button')
         deleteButton.setAttribute('id', 'delB' + movie.id)
