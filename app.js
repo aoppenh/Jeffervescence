@@ -21,7 +21,7 @@ const app = {
 
         const listItem = this.buildListItem(movie)
         this.list.appendChild(listItem)
-        
+
         this.movies[this.max + 1] = movie
 
         if (this.listEmpty === false) {
@@ -47,7 +47,7 @@ const app = {
         promoteButton.setAttribute('class', 'success button')
         promoteButton.innerHTML = '&nbsp + &nbsp'
         promoteButton.style.color = 'blue'
-        promoteButton.style.fontSize = '1.5rem'
+        promoteButton.style.fontSize = '1.6rem'
         movie.prm = promoteButton
         item.appendChild(promoteButton)
 
@@ -56,9 +56,9 @@ const app = {
         demoteButton.setAttribute('onClick', 'app.demoteItem(this.id)')
         demoteButton.setAttribute('type', 'button')
         demoteButton.setAttribute('class', 'warning button')
-        demoteButton.innerHTML = '&nbsp - &nbsp'
+        demoteButton.innerHTML = '&nbsp ─ &nbsp'
         demoteButton.style.color = 'red'
-        demoteButton.style.fontSize = '1.5rem'
+        demoteButton.style.fontSize = '1.6rem'
         movie.del = demoteButton
         item.appendChild(demoteButton)
 
@@ -69,31 +69,31 @@ const app = {
         deleteButton.setAttribute('class', 'alert button')
         deleteButton.innerHTML = '&nbsp X &nbsp'
         deleteButton.style.color = 'whitesmoke'
-        deleteButton.style.fontSize = '1.5rem'
+        deleteButton.style.fontSize = '1.6rem'
         movie.del = deleteButton
         item.appendChild(deleteButton)
 
-        const upButton = document.createElement('button')
-        upButton.setAttribute('id', 'upB' + movie.id)
-        upButton.setAttribute('onClick', 'app.upItem(this.id)')
-        upButton.setAttribute('type', 'button')
-        upButton.setAttribute('class', 'primary button')
-        upButton.innerHTML = '&nbsp ↑ &nbsp'
-        upButton.style.color = 'gold'
-        upButton.style.fontSize = '1.5rem'
-        movie.up = upButton
-        item.appendChild(upButton)
+        // const upButton = document.createElement('button')
+        // upButton.setAttribute('id', 'upB' + movie.id)
+        // upButton.setAttribute('onClick', 'app.upItem(this.id)')
+        // upButton.setAttribute('type', 'button')
+        // upButton.setAttribute('class', 'primary button')
+        // upButton.innerHTML = '&nbsp ↑ &nbsp'
+        // upButton.style.color = 'gold'
+        // upButton.style.fontSize = '1.6rem'
+        // movie.up = upButton
+        // item.appendChild(upButton)
 
-        const downButton = document.createElement('button')
-        downButton.setAttribute('id', 'dwnB' + movie.id)
-        downButton.setAttribute('onClick', 'app.downItem(this.id)')
-        downButton.setAttribute('type', 'button')
-        downButton.setAttribute('class', 'primary button')
-        downButton.innerHTML = '&nbsp ↓ &nbsp'
-        downButton.style.color = 'gold'
-        downButton.style.fontSize = '1.5rem'
-        movie.down = downButton
-        item.appendChild(downButton)
+        // const downButton = document.createElement('button')
+        // downButton.setAttribute('id', 'dwnB' + movie.id)
+        // downButton.setAttribute('onClick', 'app.downItem(this.id)')
+        // downButton.setAttribute('type', 'button')
+        // downButton.setAttribute('class', 'primary button')
+        // downButton.innerHTML = '&nbsp ↓ &nbsp'
+        // downButton.style.color = 'gold'
+        // downButton.style.fontSize = '1.6rem'
+        // movie.down = downButton
+        // item.appendChild(downButton)
 
         return item
     },
@@ -161,8 +161,8 @@ const app = {
                         console.log('upping item')
                         const current = '#' + this.movies[j].el
                         const next = '#' + this.movies[j + 1].el
-                        $(current).after($(next))
-                        //const temp = document.querySelector(current).
+                        $(current).insertAfter($(next))
+                        // app.list.insertBefore(document.querySelector(current), this.list.childNodes[this.movies.indexOf(this.movies[j].nextSibling)])
                     }
                 }
             }
@@ -177,12 +177,12 @@ const app = {
                 const nm = '#el' + this.movies[j].id
 
                 if (clicked_id === this.movies[j].down.id) {
-                    console.log('drop')
                     if (this.movies[j].id > 1) {
                         console.log('dropping item')
                         const current = '#' + this.movies[j].el
-                        const next = '#' + this.movies[j + 1].el
-                        $(current).before($(next))
+                        const next = '#' + this.movies[j - 1].el
+                        $(current).insertBefore($(next))
+                        // app.list.insertAfter(document.querySelector(current), this.list.childNodes[this.movies.indexOf(this.movies[j].previousSibling)])
                     }
                 }
             }

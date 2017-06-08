@@ -22,7 +22,4 @@ body {
 li {
     color: goldenrod;
     font-size: 2rem;
-    border: 0.5rem solid black;
-    background: black;
-    opacity: 0.4;
 }
