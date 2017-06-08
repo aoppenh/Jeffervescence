@@ -38,6 +38,7 @@ const app = {
         const item = document.createElement('li')
         item.setAttribute('id', 'el' + movie.id)
         item.textContent = movie.name
+        console.log(movie.name)
         movie.el = item.id
 
         const promoteButton = document.createElement('button')
@@ -72,6 +73,8 @@ const app = {
         deleteButton.style.fontSize = '1.6rem'
         movie.del = deleteButton
         item.appendChild(deleteButton)
+
+        // document.querySelector('#swap').setAttribute('onClick', 'app.swapItems(this.id)')
 
         // const upButton = document.createElement('button')
         // upButton.setAttribute('id', 'upB' + movie.id)
@@ -187,6 +190,17 @@ const app = {
                 }
             }
         }
+    },
+
+    swapItems(clicked_id) {
+        const current = document.querySelector('#swap1').value
+        const next = document.querySelector('#swap2').value
+
+        let copyTo = $(next).clone(true)
+        let copyFrom = $(current).clone(true)
+
+        $(next).replaceWith(copyFrom)
+        $(current).replaceWith(copyTo)
     },
 }
 
