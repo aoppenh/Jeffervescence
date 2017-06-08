@@ -263,7 +263,6 @@ const app = {
 
             if (nm === clicked_id) {
                 const split = document.querySelector(ed).textContent.split('')
-                console.log(split.indexOf('~'))
                 this.movies[j].name = document.querySelector(ed).textContent.substring(0, split.indexOf('~'))
                 localStorage.setItem('movies', JSON.stringify(this.movies))
             }
