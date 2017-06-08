@@ -41,6 +41,7 @@ const app = {
     buildListItem(movie) {
         const item = document.createElement('li')
         item.setAttribute('id', 'el' + movie.id)
+        item.dataset.id = movie.id
         item.textContent = movie.name
         console.log(movie.name)
         movie.el = item.id
