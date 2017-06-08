@@ -23,6 +23,7 @@ const app = {
             id: this.max,
             name: f.movieName.value,
             year: f.movieYear.value,
+            isProm: false,
         }
 
         this.loadMovie(movie)
@@ -42,6 +43,16 @@ const app = {
         } else {
             this.list.appendChild(listItem)
             this.listEmpty = false
+        }
+
+        if (movie.isProm) {
+            const ed = '#el' + movie.id
+            const pm = 'prmB' + movie.id
+            const dm = 'demB' + movie.id
+            document.querySelector(ed).style.color = 'crimson'
+            document.querySelector(ed).style.fontSize = '2.9rem'
+            document.getElementById(pm).disabled = true
+            document.getElementById(dm).disabled = false
         }
 
         this.max++
@@ -166,10 +177,12 @@ const app = {
             const ed = '#el' + this.movies[j].id
 
             if (nm === clicked_id) {
+                this.movies[j].isProm = true
                 document.querySelector(ed).style.color = 'crimson'
                 document.querySelector(ed).style.fontSize = '2.9rem'
                 document.getElementById(pm).disabled = true
                 document.getElementById(dm).disabled = false
+                this.save()
             }
         }
     },
