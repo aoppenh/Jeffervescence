@@ -46,7 +46,7 @@ const app = {
         const item = document.createElement('li')
         item.setAttribute('id', 'el' + movie.id)
         item.dataset.id = movie.id
-        item.textContent = movie.name
+        item.textContent = movie.name + ' '
         console.log(movie.name + ' : name')
         movie.el = item.id
 
