@@ -26,6 +26,12 @@ const app = {
 
         this.movies.push(movie)
 
+        const l = document.querySelector('ol')
+        const lLen = l.childNodes.length
+        if (lLen === 0) {
+            this.listEmpty = true
+        }
+
         if (this.listEmpty === false) {
             this.list.insertBefore(listItem, this.list.childNodes[0])
         } else {
