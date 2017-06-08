@@ -161,6 +161,13 @@ const app = {
 
             if (clicked_id === this.movies[j].del.id) {
                 $(nm).remove()
+
+                for (let i = 0; i < this.movies.length; i++) {
+                    const nd = '#el' + this.movies[i].id
+                    if (nm === nd) {
+                        this.movies.splice(i, 1)
+                    }
+                }
             }
         }
     },
