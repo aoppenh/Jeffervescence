@@ -45,6 +45,7 @@ const app = {
             this.listEmpty = false
         }
 
+        console.log(movie.isProm)
         if (movie.isProm) {
             const ed = '#el' + movie.id
             const pm = 'prmB' + movie.id
@@ -86,6 +87,7 @@ const app = {
         item.setAttribute('contentEditable', 'true')
         console.log(movie.name + ' : name')
         movie.el = item.id
+        // movie.isProm = false
 
         // document.querySelector('#swap').setAttribute('onClick', 'app.swapItems(this.id)')
 
@@ -199,10 +201,12 @@ const app = {
             const ed = '#el' + this.movies[j].id
 
             if (nm === clicked_id) {
+                this.movies[j].isProm = false
                 document.querySelector(ed).style.color = 'black'
                 document.querySelector(ed).style.fontSize = '2rem'
                 document.getElementById(dm).disabled = true
                 document.getElementById(pm).disabled = false
+                this.save()
             }
         }
     },
