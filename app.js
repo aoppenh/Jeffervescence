@@ -6,12 +6,17 @@ const app = {
         this.movies = []
 
         document.querySelector('#res').setAttribute('onClick', 'app.clearMem()')
+        document.querySelector('#help').setAttribute('onClick', 'app.help()')
 
         document
             .querySelector(selectors.formSelector)
             .addEventListener('submit', this.addMovie.bind(this))
 
         this.load()
+    },
+
+    help() {
+        alert('Enter a Jeff Goldblum movie and the year it was released')
     },
 
     addMovie(ev) {
@@ -51,7 +56,6 @@ const app = {
             const pm = 'prmB' + movie.id
             const dm = 'demB' + movie.id
             document.querySelector(ed).style.color = 'crimson'
-            document.querySelector(ed).style.fontSize = '2.9rem'
             document.getElementById(pm).disabled = true
             document.getElementById(dm).disabled = false
         }
@@ -180,8 +184,7 @@ const app = {
 
             if (nm === clicked_id) {
                 this.movies[j].isProm = true
-                document.querySelector(ed).style.color = 'crimson'
-                document.querySelector(ed).style.fontSize = '2.9rem'
+                document.querySelector(ed).style.color =  'crimson'
                 document.getElementById(pm).disabled = true
                 document.getElementById(dm).disabled = false
                 this.save()
@@ -203,7 +206,6 @@ const app = {
             if (nm === clicked_id) {
                 this.movies[j].isProm = false
                 document.querySelector(ed).style.color = 'black'
-                document.querySelector(ed).style.fontSize = '2rem'
                 document.getElementById(dm).disabled = true
                 document.getElementById(pm).disabled = false
                 this.save()
