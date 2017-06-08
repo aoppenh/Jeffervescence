@@ -4,8 +4,8 @@
 
 ol {
     list-style: none;
-    background-color: darkgrey;
-    opacity:  0.8;
+    width: 200%;
+    white-space: nowrap;
 }
 
 h1 {
@@ -17,4 +17,12 @@ h1 {
 body {
     background-size: 100vw 100vh;
     background-repeat: no-repeat;
+}
+
+li {
+    color: goldenrod;
+    font-size: 2rem;
+    border: 0.5rem solid black;
+    background: black;
+    opacity: 0.4;
 }

@@ -110,7 +110,7 @@ const app = {
 
                 if (nm === clicked_id) {
                     document.querySelector(ed).style.color = 'crimson'
-                    document.querySelector(ed).style.fontSize = '1.5rem'
+                    document.querySelector(ed).style.fontSize = '2.9rem'
                 }
             }
         }
@@ -127,8 +127,8 @@ const app = {
                 const ed = '#el' + this.movies[j].id
 
                 if (nm === clicked_id) {
-                    document.querySelector(ed).style.color = 'black'
-                    document.querySelector(ed).style.fontSize = '1rem'
+                    document.querySelector(ed).style.color = 'goldenrod'
+                    document.querySelector(ed).style.fontSize = '2rem'
                 }
             }
         }
