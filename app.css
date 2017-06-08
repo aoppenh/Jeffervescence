@@ -6,6 +6,7 @@ ol {
     list-style: none;
     width: 200%;
     white-space: nowrap;
+    text-align: left;
 }
 
 h1 {
