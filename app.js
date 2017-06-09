@@ -248,6 +248,7 @@ const app = {
 
     downItem(ev) {
         console.log('downing item')
+        console.log('not working yet')
     },
 
     saveItem(clicked_id) {
