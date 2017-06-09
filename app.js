@@ -239,7 +239,6 @@ const app = {
         console.log('up')
         // for (let j = 1; j < this.movies.length; j++) {
         //     const nm = '#el' + this.movies[j].id
-        //     debugger
         //     if (clicked_id === this.movies[j].up.id) {
 
         //     }
