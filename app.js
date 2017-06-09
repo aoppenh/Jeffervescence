@@ -50,7 +50,6 @@ const app = {
             this.listEmpty = false
         }
 
-        console.log(movie.isProm)
         if (movie.isProm) {
             const ed = '#el' + movie.id
             const pm = 'prmB' + movie.id
@@ -89,7 +88,6 @@ const app = {
         item.dataset.id = movie.id
         item.textContent = movie.name + ' ~ (' + movie.year + ') '
         item.setAttribute('contentEditable', 'true')
-        console.log(movie.name + ' : name')
         movie.el = item.id
         // movie.isProm = false
 
@@ -220,17 +218,13 @@ const app = {
         const lLen = l.childNodes.length
         for (let j = 0; j < this.movies.length; j++) {
             const nm = '#el' + this.movies[j].id
-            console.log(this.movies[j].del.id)
-            console.log(clicked_id)
 
             if (clicked_id === this.movies[j].del.id) {
                 $(nm).remove()
 
                 for (let i = 0; i < this.movies.length; i++) {
                     const nd = '#el' + this.movies[i].id
-                    console.log('deleting1')
                     if (nm === nd) {
-                        console.log('deleting2')
                         this.movies.splice(i, 1)
                         this.save()
                         break
