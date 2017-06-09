@@ -78,7 +78,7 @@ const app = {
         console.log('clearing list')
 
         localStorage.removeItem('movies')
-
+        this.movies.splice(0, this.movies.length)
         $('li').remove()
     },
 
@@ -95,7 +95,6 @@ const app = {
 
         const downButton = document.createElement('button')
         downButton.setAttribute('id', 'dwnB' + movie.id)
-        downButton.setAttribute('onClick', 'app.downItem(this.id)')
         downButton.setAttribute('type', 'button')
         downButton.setAttribute('class', 'primary button')
         downButton.setAttribute('contentEditable', 'false')
@@ -104,10 +103,10 @@ const app = {
         downButton.style.fontSize = '1.6rem'
         movie.down = downButton
         item.appendChild(downButton)
+        item.querySelector('#dwnB' + movie.id).addEventListener('click', this.downItem.bind(this))
 
         const upButton = document.createElement('button')
         upButton.setAttribute('id', 'upB' + movie.id)
-        upButton.setAttribute('onClick', 'app.upItem(this.id)')
         upButton.setAttribute('type', 'button')
         upButton.setAttribute('class', 'primary button')
         upButton.setAttribute('contentEditable', 'false')
@@ -116,6 +115,7 @@ const app = {
         upButton.style.fontSize = '1.6rem'
         movie.up = upButton
         item.appendChild(upButton)
+        item.querySelector('#upB' + movie.id).addEventListener('click', this.upItem.bind(this))
 
         const deleteButton = document.createElement('button')
         deleteButton.setAttribute('id', 'delB' + movie.id)
@@ -193,8 +193,6 @@ const app = {
     demoteItem(clicked_id) {
         console.log('demoting item')
 
-        const l = document.querySelector('ol')
-        const lLen = l.childNodes.length
         for (let j = 0; j < this.movies.length; j++) {
             const nm = 'demB' + this.movies[j].id
             const dm = 'demB' + this.movies[j].id
@@ -214,8 +212,6 @@ const app = {
     deleteItem(clicked_id) {
         console.log('deleting item')
 
-        const l = document.querySelector('ol')
-        const lLen = l.childNodes.length
         for (let j = 0; j < this.movies.length; j++) {
             const nm = '#el' + this.movies[j].id
 
@@ -234,46 +230,29 @@ const app = {
         }
     },
 
-    upItem(clicked_id) {
-        const l = document.querySelector('ol')
-        const lLen = l.childNodes.length
-        for (let j = 1; j < this.movies.length; j++) {
-            const nm = '#el' + this.movies[j].id
-            if (clicked_id === this.movies[j].up.id) {
-                if (this.movies[j].id < this.movies.length + 1) {
-                    console.log('upping item')
-                    const current = '#' + this.movies[j].el
-                    const next = '#' + this.movies[j + 1].el
-                    console.log($(current).text())
-                    console.log($(next).text())
-                    $(current).insertAfter($(next))
-                }
-            }
-        }
+    upItem(ev) {
+        const btn = ev.target
+        const item = btn.closest('li')
+        this.list.insertBefore(item, item.previousElementSibling)
+        this.save()
+
+        console.log('up')
+        // for (let j = 1; j < this.movies.length; j++) {
+        //     const nm = '#el' + this.movies[j].id
+        //     debugger
+        //     if (clicked_id === this.movies[j].up.id) {
+
+        //     }
+        // }
     },
 
-    downItem(clicked_id) {
-        const l = document.querySelector('ol')
-        const lLen = l.childNodes.length
-        for (let j = 1; j < this.movies.length; j++) {
-            const nm = '#el' + this.movies[j].id
-
-            if (clicked_id === this.movies[j].down.id) {
-                if (this.movies[j].id > 1) {
-                    console.log('dropping item')
-                    const current = '#' + this.movies[j].el
-                    const next = '#' + this.movies[j - 1].el
-                    $(current).insertBefore($(next))
-                }
-            }
-        }
+    downItem(ev) {
+        console.log('downing item')
     },
 
     saveItem(clicked_id) {
         console.log('saving edited item')
 
-        const l = document.querySelector('ol')
-        const lLen = l.childNodes.length
         for (let j = 0; j < this.movies.length; j++) {
             const nm = 'savB' + this.movies[j].id
             const ed = '#el' + this.movies[j].id
