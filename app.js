@@ -86,40 +86,39 @@ const app = {
     buildListItem(movie) {
         const item = document.createElement('li')
         item.setAttribute('id', 'el' + movie.id)
-        item.dataset.id = movie.id
         item.textContent = movie.name + ' ~ (' + movie.year + ') '
         item.setAttribute('contentEditable', 'true')
         movie.el = item.id
 
-        // const downButton = document.createElement('button')
-        // downButton.setAttribute('id', 'dwnB' + movie.id)
-        // downButton.setAttribute('type', 'button')
-        // downButton.setAttribute('class', 'primary button')
-        // downButton.setAttribute('contentEditable', 'false')
-        // // downButton.innerHTML = '&nbsp ↓ &nbsp'
-        // downButton.style.color = 'gold'
-        // downButton.style.fontSize = '1.6rem'
-        // movie.down = downButton
-        // const o = document.createElement('i')
-        // o.setAttribute('class', 'fa fa-arrow-down')
-        // downButton.appendChild(o)
-        // item.appendChild(downButton)
-        // item.querySelector('#dwnB' + movie.id).addEventListener('click', this.downItem.bind(this))
+        const downButton = document.createElement('button')
+        downButton.setAttribute('id', 'dwnB' + movie.id)
+        downButton.setAttribute('type', 'button')
+        downButton.setAttribute('class', 'primary button')
+        downButton.setAttribute('contentEditable', 'false')
+        // downButton.innerHTML = '&nbsp ↓ &nbsp'
+        downButton.style.color = 'gold'
+        downButton.style.fontSize = '1.6rem'
+        movie.down = downButton
+        const o = document.createElement('i')
+        o.setAttribute('class', 'fa fa-arrow-down')
+        downButton.appendChild(o)
+        item.appendChild(downButton)
+        item.querySelector('#dwnB' + movie.id).addEventListener('click', this.downItem.bind(this))
 
-        // const upButton = document.createElement('button')
-        // upButton.setAttribute('id', 'upB' + movie.id)
-        // upButton.setAttribute('type', 'button')
-        // upButton.setAttribute('class', 'primary button')
-        // upButton.setAttribute('contentEditable', 'false')
-        // // upButton.innerHTML = '&nbsp ↑ &nbsp'
-        // upButton.style.color = 'gold'
-        // upButton.style.fontSize = '1.6rem'
-        // movie.up = upButton
-        // const u = document.createElement('i')
-        // u.setAttribute('class', 'fa fa-arrow-up')
-        // upButton.appendChild(u)
-        // item.appendChild(upButton)
-        // item.querySelector('#upB' + movie.id).addEventListener('click', this.upItem.bind(this, upButton.id))
+        const upButton = document.createElement('button')
+        upButton.setAttribute('id', 'upB' + movie.id)
+        upButton.setAttribute('type', 'button')
+        upButton.setAttribute('class', 'primary button')
+        upButton.setAttribute('contentEditable', 'false')
+        // upButton.innerHTML = '&nbsp ↑ &nbsp'
+        upButton.style.color = 'gold'
+        upButton.style.fontSize = '1.6rem'
+        movie.up = upButton
+        const u = document.createElement('i')
+        u.setAttribute('class', 'fa fa-arrow-up')
+        upButton.appendChild(u)
+        item.appendChild(upButton)
+        item.querySelector('#upB' + movie.id).addEventListener('click', this.upItem.bind(this, upButton.id))
 
         const deleteButton = document.createElement('button')
         deleteButton.setAttribute('id', 'delB' + movie.id)
@@ -155,7 +154,7 @@ const app = {
         saveButton.setAttribute('id', 'savB' + movie.id)
         saveButton.setAttribute('onClick', 'app.saveItem(this.id)')
         saveButton.setAttribute('type', 'button')
-        saveButton.setAttribute('class', 'primary button')
+        saveButton.setAttribute('class', 'secondary button')
         saveButton.setAttribute('contentEditable', 'false')
         // saveButton.innerHTML = '&nbsp $ &nbsp'
         saveButton.style.color = 'whitesmoke'
@@ -248,13 +247,10 @@ const app = {
         console.log('upping item')
 
         for (let j = 0; j < this.movies.length; j++) {
-            const nm = '#el' + this.movies[j].id
-            const split = this.movies[j].id
-            debugger
-            if (clicked_id === this.movies[j].up.id  && ev.target.closest('li').previousElementSibling !== '#el' + 0) {
-                const item = ev.target.closest('li').previousElementSibling
+            if (clicked_id === this.movies[j].up.id) {
+                const movie = this.movies[j]
                 const prev = this.movies[j - 1]
-                this.movies[j - 1] = this.movies[j]
+                this.movies[j - 1] = movie
                 this.movies[j] = prev
                 this.save()
                 break
