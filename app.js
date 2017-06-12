@@ -55,7 +55,8 @@ const app = {
             const pm = 'prmB' + movie.id
             const dm = 'demB' + movie.id
             document.querySelector(ed).style.color = 'crimson'
-            document.getElementById(pm).innerHTML = '&nbsp ─ &nbsp'
+            // document.getElementById(pm).innerHTML = '&nbsp ─ &nbsp'
+            a.setAttribute('class', 'fa fa-star-o')
             document.getElementById(pm).setAttribute('class', 'warning button')
             document.getElementById(pm).style.color = 'crimson'
         }
@@ -96,10 +97,13 @@ const app = {
         downButton.setAttribute('type', 'button')
         downButton.setAttribute('class', 'primary button')
         downButton.setAttribute('contentEditable', 'false')
-        downButton.innerHTML = '&nbsp ↓ &nbsp'
+        // downButton.innerHTML = '&nbsp ↓ &nbsp'
         downButton.style.color = 'gold'
         downButton.style.fontSize = '1.6rem'
         movie.down = downButton
+        const o = document.createElement('i')
+        o.setAttribute('class', 'fa fa-arrow-down')
+        downButton.appendChild(o)
         item.appendChild(downButton)
         item.querySelector('#dwnB' + movie.id).addEventListener('click', this.downItem.bind(this))
 
@@ -108,10 +112,13 @@ const app = {
         upButton.setAttribute('type', 'button')
         upButton.setAttribute('class', 'primary button')
         upButton.setAttribute('contentEditable', 'false')
-        upButton.innerHTML = '&nbsp ↑ &nbsp'
+        // upButton.innerHTML = '&nbsp ↑ &nbsp'
         upButton.style.color = 'gold'
         upButton.style.fontSize = '1.6rem'
         movie.up = upButton
+        const u = document.createElement('i')
+        u.setAttribute('class', 'fa fa-arrow-up')
+        upButton.appendChild(u)
         item.appendChild(upButton)
         item.querySelector('#upB' + movie.id).addEventListener('click', this.upItem.bind(this, upButton.id))
 
@@ -121,10 +128,13 @@ const app = {
         deleteButton.setAttribute('type', 'button')
         deleteButton.setAttribute('class', 'alert button')
         deleteButton.setAttribute('contentEditable', 'false')
-        deleteButton.innerHTML = '&nbsp X &nbsp'
+        // deleteButton.innerHTML = '&nbsp X &nbsp'
         deleteButton.style.color = 'whitesmoke'
         deleteButton.style.fontSize = '1.6rem'
         movie.del = deleteButton
+        const i = document.createElement('i')
+        i.setAttribute('class', 'fa fa-trash-o')
+        deleteButton.appendChild(i)
         item.appendChild(deleteButton)
 
         const promoteButton = document.createElement('button')
@@ -133,10 +143,13 @@ const app = {
         promoteButton.setAttribute('type', 'button')
         promoteButton.setAttribute('class', 'success button')
         promoteButton.setAttribute('contentEditable', 'false')
-        promoteButton.innerHTML = '&nbsp + &nbsp'
+        // promoteButton.innerHTML = '&nbsp + &nbsp'
         promoteButton.style.color = 'blue'
         promoteButton.style.fontSize = '1.6rem'
         movie.prm = promoteButton
+        const a = document.createElement('i')
+        a.setAttribute('class', 'fa fa-star-o')
+        promoteButton.appendChild(a)
         item.appendChild(promoteButton)
 
         const saveButton = document.createElement('button')
@@ -145,10 +158,13 @@ const app = {
         saveButton.setAttribute('type', 'button')
         saveButton.setAttribute('class', 'primary button')
         saveButton.setAttribute('contentEditable', 'false')
-        saveButton.innerHTML = '&nbsp $ &nbsp'
+        // saveButton.innerHTML = '&nbsp $ &nbsp'
         saveButton.style.color = 'whitesmoke'
         saveButton.style.fontSize = '1.6rem'
         movie.sav = saveButton
+        const e = document.createElement('i')
+        e.setAttribute('class', 'fa fa-floppy-o')
+        saveButton.appendChild(e)
         item.appendChild(saveButton)
 
         return item
@@ -164,8 +180,10 @@ const app = {
             if (nm === clicked_id && this.movies[j].isProm === false) {
                 console.log('promoting item')
                 this.movies[j].isProm = true
-                document.querySelector(ed).style.color =  'crimson'
-                document.getElementById(pm).innerHTML = '&nbsp ─ &nbsp'
+                document.querySelector(ed).style.color = 'crimson'
+                // document.getElementById(pm).innerHTML = '&nbsp ─ &nbsp'
+                const a = document.createElement('i')
+                a.setAttribute('class', 'fa fa-star-o')
                 document.getElementById(pm).setAttribute('class', 'warning button')
                 document.getElementById(pm).style.color = 'crimson'
                 this.save()
@@ -173,7 +191,7 @@ const app = {
                 console.log('demoting item')
                 this.movies[j].isProm = false
                 document.querySelector(ed).style.color = 'black'
-                document.getElementById(pm).innerHTML = '&nbsp + &nbsp'
+                // document.getElementById(pm).innerHTML = '&nbsp + &nbsp'
                 document.getElementById(pm).setAttribute('class', 'success button')
                 document.getElementById(pm).style.color = 'blue'
                 this.save()
