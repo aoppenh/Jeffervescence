@@ -43,6 +43,8 @@ li {
     width: 5rem;
     font-size: 2rem;
     background-color: #4b79b4;
+    opacity: 0.85;
+    color: goldenrod;
 }
 
 #res {
@@ -50,6 +52,8 @@ li {
     width: 8rem;
     font-size: 1.3rem;
     background-color: #4b79b4;
+    opacity: 0.85;
+    color: goldenrod;
 }
 
 #sub {
@@ -57,9 +61,19 @@ li {
     width: 8rem;
     font-size: 1.3rem;
     background-color: #4b79b4;
+    opacity: 0.85;
+    color: goldenrod;
 }
 
 #in {
     height: 4rem;
     width: 27rem;
+}
+
+#text {
+    color: black;
+    font-size: 2rem;
+    clear: right;
+    border: 0.5rem;
+    transition: 0.5s;
 }
