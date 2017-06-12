@@ -89,21 +89,18 @@ const app = {
         item.textContent = movie.name + ' ~ (' + movie.year + ') '
         item.setAttribute('contentEditable', 'true')
         movie.el = item.id
-        // movie.isProm = false
 
-        // document.querySelector('#swap').setAttribute('onClick', 'app.swapItems(this.id)')
-
-        // const downButton = document.createElement('button')
-        // downButton.setAttribute('id', 'dwnB' + movie.id)
-        // downButton.setAttribute('type', 'button')
-        // downButton.setAttribute('class', 'primary button')
-        // downButton.setAttribute('contentEditable', 'false')
-        // downButton.innerHTML = '&nbsp ↓ &nbsp'
-        // downButton.style.color = 'gold'
-        // downButton.style.fontSize = '1.6rem'
-        // movie.down = downButton
-        // item.appendChild(downButton)
-        // item.querySelector('#dwnB' + movie.id).addEventListener('click', this.downItem.bind(this))
+        const downButton = document.createElement('button')
+        downButton.setAttribute('id', 'dwnB' + movie.id)
+        downButton.setAttribute('type', 'button')
+        downButton.setAttribute('class', 'primary button')
+        downButton.setAttribute('contentEditable', 'false')
+        downButton.innerHTML = '&nbsp ↓ &nbsp'
+        downButton.style.color = 'gold'
+        downButton.style.fontSize = '1.6rem'
+        movie.down = downButton
+        item.appendChild(downButton)
+        item.querySelector('#dwnB' + movie.id).addEventListener('click', this.downItem.bind(this))
 
         const upButton = document.createElement('button')
         upButton.setAttribute('id', 'upB' + movie.id)
@@ -129,18 +126,18 @@ const app = {
         movie.del = deleteButton
         item.appendChild(deleteButton)
 
-        const demoteButton = document.createElement('button')
-        demoteButton.setAttribute('id', 'demB' + movie.id)
-        demoteButton.setAttribute('onClick', 'app.demoteItem(this.id)')
-        demoteButton.setAttribute('type', 'button')
-        demoteButton.setAttribute('class', 'warning button')
-        demoteButton.setAttribute('contentEditable', 'false')
-        demoteButton.innerHTML = '&nbsp ─ &nbsp'
-        demoteButton.style.color = 'red'
-        demoteButton.style.fontSize = '1.6rem'
-        movie.dem = demoteButton
-        demoteButton.disabled = true
-        item.appendChild(demoteButton)
+        // const demoteButton = document.createElement('button')
+        // demoteButton.setAttribute('id', 'demB' + movie.id)
+        // demoteButton.setAttribute('onClick', 'app.demoteItem(this.id)')
+        // demoteButton.setAttribute('type', 'button')
+        // demoteButton.setAttribute('class', 'warning button')
+        // demoteButton.setAttribute('contentEditable', 'false')
+        // demoteButton.innerHTML = '&nbsp ─ &nbsp'
+        // demoteButton.style.color = 'red'
+        // demoteButton.style.fontSize = '1.6rem'
+        // movie.dem = demoteButton
+        // demoteButton.disabled = true
+        // item.appendChild(demoteButton)
 
         const promoteButton = document.createElement('button')
         promoteButton.setAttribute('id', 'prmB' + movie.id)
@@ -172,19 +169,25 @@ const app = {
     promoteItem(clicked_id) {
         console.log('promoting item')
 
-        const l = document.querySelector('ol')
-        const lLen = l.childNodes.length
         for (let j = 0; j < this.movies.length; j++) {
             const nm = 'prmB' + this.movies[j].id
             const dm = 'demB' + this.movies[j].id
             const pm = 'prmB' + this.movies[j].id
             const ed = '#el' + this.movies[j].id
 
-            if (nm === clicked_id) {
+            if (nm === clicked_id && this.movies[j].isProm === false) {
                 this.movies[j].isProm = true
                 document.querySelector(ed).style.color =  'crimson'
-                document.getElementById(pm).disabled = true
-                document.getElementById(dm).disabled = false
+                document.getElementById(pm).innerHTML = '&nbsp ─ &nbsp'
+                // document.getElementById(pm).disabled = true
+                // document.getElementById(dm).disabled = false
+                this.save()
+            } else if (nm === clicked_id && this.movies[j].isProm === true) {
+                this.movies[j].isProm = false
+                document.querySelector(ed).style.color = 'black'
+                document.getElementById(pm).innerHTML = '&nbsp + &nbsp'
+                // document.getElementById(dm).disabled = true
+                // document.getElementById(pm).disabled = false
                 this.save()
             }
         }
@@ -275,16 +278,6 @@ const app = {
                 break
             }
         }
-    },
-
-    swapItems(clicked_id) {
-        console.log('swapping items')
-
-        const swap1 = document.querySelector('#swap1').innerHTML
-        const swap2 = document.querySelector('#swap2').innerHTML
-
-        document.querySelector('#swap1').innerHTML = swap2
-        document.querySelector('#swap2').innerHTML = swap1
     },
 }
 
