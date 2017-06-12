@@ -55,8 +55,9 @@ const app = {
             const pm = 'prmB' + movie.id
             const dm = 'demB' + movie.id
             document.querySelector(ed).style.color = 'crimson'
-            document.getElementById(pm).disabled = true
-            document.getElementById(dm).disabled = false
+            document.getElementById(pm).innerHTML = '&nbsp ─ &nbsp'
+            document.getElementById(pm).setAttribute('class', 'warning button')
+            document.getElementById(pm).style.color = 'crimson'
         }
 
         this.max++
@@ -112,7 +113,7 @@ const app = {
         upButton.style.fontSize = '1.6rem'
         movie.up = upButton
         item.appendChild(upButton)
-        item.querySelector('#upB' + movie.id).addEventListener('click', this.upItem.bind(this))
+        item.querySelector('#upB' + movie.id).addEventListener('click', this.upItem.bind(this, upButton.id))
 
         const deleteButton = document.createElement('button')
         deleteButton.setAttribute('id', 'delB' + movie.id)
@@ -125,19 +126,6 @@ const app = {
         deleteButton.style.fontSize = '1.6rem'
         movie.del = deleteButton
         item.appendChild(deleteButton)
-
-        // const demoteButton = document.createElement('button')
-        // demoteButton.setAttribute('id', 'demB' + movie.id)
-        // demoteButton.setAttribute('onClick', 'app.demoteItem(this.id)')
-        // demoteButton.setAttribute('type', 'button')
-        // demoteButton.setAttribute('class', 'warning button')
-        // demoteButton.setAttribute('contentEditable', 'false')
-        // demoteButton.innerHTML = '&nbsp ─ &nbsp'
-        // demoteButton.style.color = 'red'
-        // demoteButton.style.fontSize = '1.6rem'
-        // movie.dem = demoteButton
-        // demoteButton.disabled = true
-        // item.appendChild(demoteButton)
 
         const promoteButton = document.createElement('button')
         promoteButton.setAttribute('id', 'prmB' + movie.id)
@@ -167,8 +155,6 @@ const app = {
     },
 
     promoteItem(clicked_id) {
-        console.log('promoting item')
-
         for (let j = 0; j < this.movies.length; j++) {
             const nm = 'prmB' + this.movies[j].id
             const dm = 'demB' + this.movies[j].id
@@ -176,24 +162,28 @@ const app = {
             const ed = '#el' + this.movies[j].id
 
             if (nm === clicked_id && this.movies[j].isProm === false) {
+                console.log('promoting item')
                 this.movies[j].isProm = true
                 document.querySelector(ed).style.color =  'crimson'
                 document.getElementById(pm).innerHTML = '&nbsp ─ &nbsp'
-                // document.getElementById(pm).disabled = true
-                // document.getElementById(dm).disabled = false
+                document.getElementById(pm).setAttribute('class', 'warning button')
+                document.getElementById(pm).style.color = 'crimson'
                 this.save()
             } else if (nm === clicked_id && this.movies[j].isProm === true) {
+                console.log('demoting item')
                 this.movies[j].isProm = false
                 document.querySelector(ed).style.color = 'black'
                 document.getElementById(pm).innerHTML = '&nbsp + &nbsp'
-                // document.getElementById(dm).disabled = true
-                // document.getElementById(pm).disabled = false
+                document.getElementById(pm).setAttribute('class', 'success button')
+                document.getElementById(pm).style.color = 'blue'
                 this.save()
             }
         }
     },
 
     demoteItem(clicked_id) {
+        // This method is no longer in use
+
         console.log('demoting item')
 
         for (let j = 0; j < this.movies.length; j++) {
@@ -233,31 +223,36 @@ const app = {
         }
     },
 
-    upItem(ev) {
+    upItem(clicked_id, ev) {
+        ev.preventDefault()
+
         const btn = ev.target
-        const clicked_id = ev.target.id
         const item = btn.closest('li')
         this.list.insertBefore(item, item.previousElementSibling)
 
         console.log('upping item')
-        // This part below will actually switch the two elements in the array once it works
-        // for (let j = 0; j < this.movies.length; j++) {
-        //     const nm = '#el' + this.movies[j].id
-        //     if (clicked_id === this.movies[j].up.id) {
-        //         const swap = this.movies.indexOf(document.querySelector(item.previousElementSibling))
-        //         const temp = this.movies[j]
-        //         console.log('swap : ' + swap)
-        //         console.log('temp : ' + temp)
-        //         console.log('prev : ' + document.querySelector(item.previousElementSibling))
-        //         this.movmies[j] = this.movies[swap]
-        //         this.movies[swap] = temp
-        //         this.save()
-        //         break
-        //     }
-        // }
+
+        for (let j = 0; j < this.movies.length; j++) {
+            const nm = '#el' + this.movies[j].id
+            if (clicked_id === this.movies[j].up.id) {
+                const swap = this.movies.indexOf(document.querySelector(item.previousElementSibling))
+                const temp = this.movies[j]
+                console.log('swap : ' + swap)
+                console.log('temp : ' + temp)
+                console.log('prev : ' + document.querySelector(item.previousElementSibling))
+                this.movmies[j] = this.movies[swap]
+                this.movies[swap] = temp
+                this.save()
+                break
+            }
+        }
     },
 
     downItem(ev) {
+        ev.preventDefault()
+
+        // This method is not currently in use
+
         console.log('downing item')
         console.log('not working yet')
     },

@@ -29,11 +29,13 @@ li {
     font-size: 2rem;
     clear: right;
     border: 0.5rem;
+    transition: 0.5s;
 }
 
 .button {
     float: right;
     opacity: 1;
+    transition: 0.5s;
 }
 
 #help {
