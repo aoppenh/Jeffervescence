@@ -146,7 +146,7 @@ const app = {
         promoteButton.setAttribute('id', 'prmB' + movie.id)
         promoteButton.setAttribute('onClick', 'app.promoteItem(this.id)')
         promoteButton.setAttribute('type', 'button')
-        promoteButton.setAttribute('class', 'secondary button')
+        promoteButton.setAttribute('class', 'success button')
         promoteButton.setAttribute('contentEditable', 'false')
         promoteButton.innerHTML = '&nbsp + &nbsp'
         promoteButton.style.color = 'blue'
@@ -158,7 +158,7 @@ const app = {
         saveButton.setAttribute('id', 'savB' + movie.id)
         saveButton.setAttribute('onClick', 'app.saveItem(this.id)')
         saveButton.setAttribute('type', 'button')
-        saveButton.setAttribute('class', 'success button')
+        saveButton.setAttribute('class', 'primary button')
         saveButton.setAttribute('contentEditable', 'false')
         saveButton.innerHTML = '&nbsp $ &nbsp'
         saveButton.style.color = 'whitesmoke'
@@ -232,15 +232,24 @@ const app = {
 
     upItem(ev) {
         const btn = ev.target
+        const clicked_id = ev.target.id
         const item = btn.closest('li')
         this.list.insertBefore(item, item.previousElementSibling)
-        this.save()
 
-        console.log('up')
-        // for (let j = 1; j < this.movies.length; j++) {
+        console.log('upping item')
+        // This part below will actually switch the two elements in the array once it works
+        // for (let j = 0; j < this.movies.length; j++) {
         //     const nm = '#el' + this.movies[j].id
         //     if (clicked_id === this.movies[j].up.id) {
-
+        //         const swap = this.movies.indexOf(document.querySelector(item.previousElementSibling))
+        //         const temp = this.movies[j]
+        //         console.log('swap : ' + swap)
+        //         console.log('temp : ' + temp)
+        //         console.log('prev : ' + document.querySelector(item.previousElementSibling))
+        //         this.movmies[j] = this.movies[swap]
+        //         this.movies[swap] = temp
+        //         this.save()
+        //         break
         //     }
         // }
     },
