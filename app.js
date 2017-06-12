@@ -93,17 +93,17 @@ const app = {
 
         // document.querySelector('#swap').setAttribute('onClick', 'app.swapItems(this.id)')
 
-        const downButton = document.createElement('button')
-        downButton.setAttribute('id', 'dwnB' + movie.id)
-        downButton.setAttribute('type', 'button')
-        downButton.setAttribute('class', 'primary button')
-        downButton.setAttribute('contentEditable', 'false')
-        downButton.innerHTML = '&nbsp ↓ &nbsp'
-        downButton.style.color = 'gold'
-        downButton.style.fontSize = '1.6rem'
-        movie.down = downButton
-        item.appendChild(downButton)
-        item.querySelector('#dwnB' + movie.id).addEventListener('click', this.downItem.bind(this))
+        // const downButton = document.createElement('button')
+        // downButton.setAttribute('id', 'dwnB' + movie.id)
+        // downButton.setAttribute('type', 'button')
+        // downButton.setAttribute('class', 'primary button')
+        // downButton.setAttribute('contentEditable', 'false')
+        // downButton.innerHTML = '&nbsp ↓ &nbsp'
+        // downButton.style.color = 'gold'
+        // downButton.style.fontSize = '1.6rem'
+        // movie.down = downButton
+        // item.appendChild(downButton)
+        // item.querySelector('#dwnB' + movie.id).addEventListener('click', this.downItem.bind(this))
 
         const upButton = document.createElement('button')
         upButton.setAttribute('id', 'upB' + movie.id)
