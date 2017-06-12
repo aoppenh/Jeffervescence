@@ -5,8 +5,8 @@
 ol {
     list-style: none;
     width: 200%;
-    white-space: nowrap;
     text-align: left;
+    white-space: nowrap;
 }
 
 h1 {
@@ -76,4 +76,10 @@ li {
     clear: right;
     border: 0.5rem;
     transition: 0.5s;
+}
+
+.movie:first-child button.up, .movie.last-child button.down {
+  background-color: #ddd;
+  color: #eee;
+  cursor: not-allowed;
 }

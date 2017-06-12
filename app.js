@@ -88,12 +88,13 @@ const app = {
         item.setAttribute('id', 'el' + movie.id)
         item.textContent = movie.name + ' ~ (' + movie.year + ') '
         item.setAttribute('contentEditable', 'true')
+        item.setAttribute('class', 'movie')
         movie.el = item.id
 
         const downButton = document.createElement('button')
         downButton.setAttribute('id', 'dwnB' + movie.id)
         downButton.setAttribute('type', 'button')
-        downButton.setAttribute('class', 'primary button')
+        downButton.setAttribute('class', 'primary button down')
         downButton.setAttribute('contentEditable', 'false')
         // downButton.innerHTML = '&nbsp ↓ &nbsp'
         downButton.style.color = 'gold'
@@ -103,12 +104,12 @@ const app = {
         o.setAttribute('class', 'fa fa-arrow-down')
         downButton.appendChild(o)
         item.appendChild(downButton)
-        item.querySelector('#dwnB' + movie.id).addEventListener('click', this.downItem.bind(this))
+        item.querySelector('#dwnB' + movie.id).addEventListener('click', this.downItem.bind(this, downButton.id))
 
         const upButton = document.createElement('button')
         upButton.setAttribute('id', 'upB' + movie.id)
         upButton.setAttribute('type', 'button')
-        upButton.setAttribute('class', 'primary button')
+        upButton.setAttribute('class', 'primary button up')
         upButton.setAttribute('contentEditable', 'false')
         // upButton.innerHTML = '&nbsp ↑ &nbsp'
         upButton.style.color = 'gold'
@@ -117,6 +118,7 @@ const app = {
         const u = document.createElement('i')
         u.setAttribute('class', 'fa fa-arrow-up')
         upButton.appendChild(u)
+        // this.movies[this.movies.indexOf(movie) - 1].upButton.disabled = false
         item.appendChild(upButton)
         item.querySelector('#upB' + movie.id).addEventListener('click', this.upItem.bind(this, upButton.id))
 
@@ -258,13 +260,23 @@ const app = {
         }
     },
 
-    downItem(ev) {
+    downItem(clicked_id, ev) {
         ev.preventDefault()
 
-        // This method is not currently in use
+        this.list.insertBefore(ev.target.closest('li'), ev.target.closest('li').previousElementSibling)
 
         console.log('downing item')
-        console.log('not working yet')
+
+        for (let j = 0; j < this.movies.length; j++) {
+            if (clicked_id === this.movies[j].up.id) {
+                const movie = this.movies[j]
+                const prev = this.movies[j + 1]
+                this.movies[j + 1] = movie
+                this.movies[j] = prev
+                this.save()
+                break
+            }
+        }
     },
 
     saveItem(clicked_id) {
